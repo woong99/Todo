@@ -3,6 +3,8 @@ import 'react-calendar/dist/Calendar.css';
 import Calendars from './component/Calendars';
 import styled from 'styled-components';
 import TodoItems from './component/TodoItems';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const StyledContainer = styled(Container)`
   height: calc(var(--vh, 1vh) * 100);
@@ -28,6 +30,9 @@ function App() {
   window.addEventListener('resize', () => {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+  });
+  useEffect(() => {
+    axios.get('/api/list').then((res) => console.log(res));
   });
   return (
     <div>
