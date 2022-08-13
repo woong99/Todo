@@ -8,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Slf4j
 class TodoServiceTest {
@@ -18,10 +16,16 @@ class TodoServiceTest {
     private TodoService todoService;
 
     @Test
-    public void getTodos(){
+    public void getTodosTest() {
         List<Todo> todos = todoService.getTodos();
         todos.forEach(todo -> {
             log.info(String.valueOf(todo));
         });
+    }
+
+    @Test
+    public void getTodosWithDateTest() {
+        List<Todo> todos = todoService.getTodosWithDate("2022-08-13");
+        log.info(String.valueOf(todos));
     }
 }

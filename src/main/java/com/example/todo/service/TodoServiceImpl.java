@@ -9,12 +9,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class TodoServiceImpl implements TodoService{
+public class TodoServiceImpl implements TodoService {
 
     private final TodoMapper todoMapper;
 
+
     @Override
-    public List<Todo> getTodos() {
-        return todoMapper.getTodos();
+    public List<Todo> getTodosWithDate(String date) {
+        return todoMapper.getTodosWithDate(date);
     }
 }

@@ -5,5 +5,6 @@ import com.example.todo.dto.Todo;
 import java.util.List;
 
 public interface TodoService {
-    public List<Todo> getTodos();
+
+    public List<Todo> getTodosWithDate(String date);
 }
