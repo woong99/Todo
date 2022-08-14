@@ -18,4 +18,24 @@ public class TodoServiceImpl implements TodoService {
     public List<Todo> getTodosWithDate(String date) {
         return todoMapper.getTodosWithDate(date);
     }
+
+    @Override
+    public void addTodo(Todo todo) {
+        todoMapper.addTodo(todo);
+    }
+
+    @Override
+    public Todo getTodo(int id) {
+        return todoMapper.getTodo(id);
+    }
+
+    @Override
+    public void deleteTodo(int id) {
+        todoMapper.deleteTodo(id);
+    }
+
+    @Override
+    public void modifyTodo(int id, Todo todo) {
+        todoMapper.modifyTodo(id, todo);
+    }
 }

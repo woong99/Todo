@@ -12,4 +12,12 @@ import java.util.List;
 public interface TodoMapper {
 
     List<Todo> getTodosWithDate(@Param("date") String date);
+
+    void addTodo(Todo todo);
+
+    Todo getTodo(@Param("id") int id);
+
+    void deleteTodo(@Param("id") int id);
+
+    void modifyTodo(@Param("id") int id, @Param("todo") Todo todo);
 }

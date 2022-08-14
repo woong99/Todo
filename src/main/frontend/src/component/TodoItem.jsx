@@ -1,5 +1,7 @@
 import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
+import TodoModifyModal from './TodoModifyModal';
 
 const Todo = styled.div`
   font-size: 24px;
@@ -9,8 +11,25 @@ const Todo = styled.div`
   align-items: center;
 `;
 
-const TodoItem = ({ title }) => {
-  return <Todo>{title}</Todo>;
+const TodoItem = ({ data, setModifyModal, modifyModal }) => {
+  return (
+    <>
+      <Todo
+        onClick={() => {
+          setModifyModal({ state: true, data: data });
+        }}
+      >
+        {data.todoTitle}
+      </Todo>
+      {modifyModal && (
+        <TodoModifyModal
+          data={data}
+          modifyModal={modifyModal}
+          setModifyModal={setModifyModal}
+        ></TodoModifyModal>
+      )}
+    </>
+  );
 };
 
 export default TodoItem;

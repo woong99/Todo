@@ -2,11 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.todo.mapper.TodoMapper">
-
-
     <select id="getTodosWithDate" resultType="Todo">
         SELECT *
         FROM todo_table
         where todo_date = #{date};
     </select>
+
+    <insert id="addTodo" parameterType="com.example.todo.dto.Todo">
+        insert into todo_table(todo_title, todo_content)
+            value (#{todoTitle}, #{todoContent})
+    </insert>
+
+    <select id="getTodo" resultType="Todo">
+        select *
+        from todo_table
+        where todo_id = #{id}
+    </select>
+
+    <delete id="deleteTodo">
+        delete
+        from todo_table
+        where todo_id =
+              #{id}
+    </delete>
+
+    <update id="modifyTodo" parameterType="com.example.todo.dto.Todo">
+        update todo_table
+        set todo_title   = #{todo.todoTitle},
+            todo_content = #{todo.todoContent}
+        where todo_id = #{id}
+    </update>
 </mapper>

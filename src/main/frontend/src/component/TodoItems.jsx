@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import TodoItem from './TodoItem';
 import axios from 'axios';
 import { useState } from 'react';
-import TodoInsert from './TodoInsert';
+import TodoInsertModal from './TodoInsertModal';
 
 const Container = styled.div`
   overflow: scroll;
@@ -29,16 +29,34 @@ const TodoItems = () => {
   const [todos, setTodos] = useState();
   const selectedDate = useSelector((state) => state.today);
   const [modal, setModal] = useState(false);
-
+  const [modifyModal, setModifyModal] = useState(false);
+  console.log(modifyModal);
   useEffect(() => {
-    axios.get(`/api/todos?date=${selectedDate}`).then((res) => setTodos(res.data));
-  }, [selectedDate]);
+    if (modal === false && modifyModal === false) {
+      axios
+        .get('/api/todos', {
+          params: {
+            date: selectedDate,
+          },
+        })
+        .then((res) => {
+          setTodos(res.data);
+        });
+    }
+  }, [selectedDate, modal, modifyModal]);
 
   return (
     <Container>
       {todos !== undefined &&
-        todos.map((todo, index) => <TodoItem title={todo.todoTitle} key={index} />)}
-      {modal && <TodoInsert date={selectedDate} setModal={setModal} />}
+        todos.map((todo, index) => (
+          <TodoItem
+            data={todo}
+            key={index}
+            setModifyModal={setModifyModal}
+            modifyModal={modifyModal}
+          />
+        ))}
+      {modal && <TodoInsertModal date={selectedDate} setModal={setModal} />}
       <Button onClick={() => setModal(true)}>+</Button>
     </Container>
   );

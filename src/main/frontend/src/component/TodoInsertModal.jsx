@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import { useState } from 'react';
-import { useEffect } from 'react';
+import axios from 'axios';
 
 const Container = styled.div`
   width: 95%;
@@ -16,6 +16,7 @@ const Container = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   z-index: 1;
+  font-size: 16px;
 `;
 const Header = styled.div`
   display: flex;
@@ -30,6 +31,7 @@ const BlackButton = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  font-size: 16px;
 `;
 
 const GrayButton = styled.div`
@@ -40,6 +42,7 @@ const GrayButton = styled.div`
   align-items: center;
   cursor: pointer;
   color: #9b9b9b;
+  font-size: 16px;
 `;
 const Contents = styled.div`
   display: flex;
@@ -69,7 +72,7 @@ const Content = styled.textarea`
 const ContentLength = styled.div`
   text-align: right;
 `;
-const TodoInsert = ({ date, setModal }) => {
+const TodoInsertModal = ({ date, setModal }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const changeTitle = (e) => {
@@ -78,12 +81,21 @@ const TodoInsert = ({ date, setModal }) => {
   const changeContent = (e) => {
     setContent(e.target.value);
   };
+  const addTodo = () => {
+    axios
+      .post('/api/add', {
+        todoTitle: title,
+        todoContent: content,
+      })
+      .then((res) => console.log(res))
+      .then(() => setModal(false));
+  };
   return (
     <Container>
       <Header>
         <BlackButton onClick={() => setModal(false)}>닫기</BlackButton>
         {moment(date).format('YYYY년 MM월 DD일')}
-        {title ? <BlackButton>완료</BlackButton> : <GrayButton>완료</GrayButton>}
+        {title ? <BlackButton onClick={addTodo}>완료</BlackButton> : <GrayButton>완료</GrayButton>}
       </Header>
       <Contents>
         <Title type="text" placeholder="제목" maxLength="20" onChange={changeTitle} />
@@ -94,4 +106,4 @@ const TodoInsert = ({ date, setModal }) => {
   );
 };
 
-export default TodoInsert;
+export default TodoInsertModal;

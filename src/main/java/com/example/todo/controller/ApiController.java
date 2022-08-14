@@ -27,8 +27,23 @@ public class ApiController {
     }
 
     @PostMapping("/add")
-    public Todo addTodo(@RequestBody Todo todo) {
+    public void addTodo(@RequestBody Todo todo) {
+        todoService.addTodo(todo);
+    }
+
+    @GetMapping("/todo")
+    public Todo getTodo(@RequestParam int id) {
+        return todoService.getTodo(id);
+    }
+
+    @DeleteMapping("/todo")
+    public void deleteTodo(@RequestParam int id) {
+        todoService.deleteTodo(id);
+    }
+
+    @PutMapping("/modify")
+    public void modifyTodo(@RequestParam int id, @RequestBody Todo todo) {
         System.out.println(todo);
-        return todo;
+        todoService.modifyTodo(id, todo);
     }
 }
