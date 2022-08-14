@@ -11,25 +11,28 @@ const Todo = styled.div`
   align-items: center;
 `;
 
-const TodoItem = ({ data, setModifyModal, modifyModal }) => {
-  return (
-    <>
-      <Todo
-        onClick={() => {
-          setModifyModal({ state: true, data: data });
-        }}
-      >
-        {data.todoTitle}
-      </Todo>
-      {modifyModal && (
-        <TodoModifyModal
-          data={data}
-          modifyModal={modifyModal}
-          setModifyModal={setModifyModal}
-        ></TodoModifyModal>
-      )}
-    </>
-  );
-};
+const TodoItem = React.memo(
+  ({ data, setModifyModal }) => {
+    console.log('TodoItem');
+    return (
+      <>
+        <Todo
+          onClick={() => {
+            setModifyModal({ state: true, data: data });
+          }}
+        >
+          {data.todoTitle}
+        </Todo>
+      </>
+    );
+  },
+  (prev, next) => {
+    if (prev.data !== next.data) {
+      return false;
+    }
+
+    return true;
+  },
+);
 
 export default TodoItem;

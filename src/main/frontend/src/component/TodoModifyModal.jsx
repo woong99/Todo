@@ -84,12 +84,12 @@ const DeleteButton = styled.div`
   align-items: center; ;
 `;
 const TodoModifyModal = ({ data, modifyModal, setModifyModal }) => {
-  console.log(modifyModal);
+  console.log('TodoModifyModal');
 
   const [title, setTitle] = useState(modifyModal.data.todoTitle);
   const [content, setContent] = useState(modifyModal.data.todoContent);
   const [modify, setModify] = useState(true);
-  console.log(title, content);
+
   const changeTitle = (e) => {
     setTitle(e.target.value);
   };
