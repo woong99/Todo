@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadMonth, loadToday } from '../redux/modules/today';
 
 const CalendarContainer = styled.div`
-  width: 400px;
+  /* width: 400px; */
+  width: 100%;
 `;
 const CalendarHeader = styled.div`
   display: flex;
