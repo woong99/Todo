@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { useState } from 'react';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { action } from '../redux/modules/todos';
 
 const Container = styled.div`
   width: 95%;
@@ -83,9 +85,8 @@ const DeleteButton = styled.div`
   justify-content: center;
   align-items: center; ;
 `;
-const TodoModifyModal = ({ data, modifyModal, setModifyModal }) => {
-  console.log('TodoModifyModal');
-
+const TodoModifyModal = ({ data, date, modifyModal, setModifyModal }) => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState(modifyModal.data.todoTitle);
   const [content, setContent] = useState(modifyModal.data.todoContent);
   const [modify, setModify] = useState(true);
@@ -104,7 +105,7 @@ const TodoModifyModal = ({ data, modifyModal, setModifyModal }) => {
           id: modifyModal.data.todoId,
         },
       })
-      .then((res) => console.log(res))
+      .then(() => dispatch(action.getTodos(date.month)).unwrap())
       .then(() => setModifyModal(false));
   };
   const modifyTodo = () => {
@@ -113,7 +114,7 @@ const TodoModifyModal = ({ data, modifyModal, setModifyModal }) => {
         todoTitle: title,
         todoContent: content,
       })
-      .then((res) => console.log(res))
+      .then(() => dispatch(action.getTodos(date.month)).unwrap())
       .then(() => setModifyModal(false));
   };
   return (

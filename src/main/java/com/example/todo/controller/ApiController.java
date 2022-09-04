@@ -14,12 +14,11 @@ public class ApiController {
 
     private final TodoService todoService;
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
 
-//
+//    @GetMapping("/todos")
+//    public List<Todo> getTodos() {
+//        return todoService.getTodos();
+//    }
 
     @GetMapping("/todos")
     public List<Todo> getTodosWithDate(@RequestParam String date) {

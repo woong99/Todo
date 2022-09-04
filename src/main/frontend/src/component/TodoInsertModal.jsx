@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { useState } from 'react';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { action } from '../redux/modules/todos';
 
 const Container = styled.div`
   width: 95%;
@@ -73,6 +75,7 @@ const ContentLength = styled.div`
   text-align: right;
 `;
 const TodoInsertModal = ({ date, setModal }) => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const changeTitle = (e) => {
@@ -86,15 +89,16 @@ const TodoInsertModal = ({ date, setModal }) => {
       .post('/api/add', {
         todoTitle: title,
         todoContent: content,
+        todoDate: moment(date.today).format('YYYY-MM-DD'),
       })
-      .then((res) => console.log(res))
+      .then(() => dispatch(action.getTodos(date.month)).unwrap())
       .then(() => setModal(false));
   };
   return (
     <Container>
       <Header>
         <BlackButton onClick={() => setModal(false)}>닫기</BlackButton>
-        {moment(date).format('YYYY년 MM월 DD일')}
+        {moment(date.today).format('YYYY년 MM월 DD일')}
         {title ? <BlackButton onClick={addTodo}>완료</BlackButton> : <GrayButton>완료</GrayButton>}
       </Header>
       <Contents>

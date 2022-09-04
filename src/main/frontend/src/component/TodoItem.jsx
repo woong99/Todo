@@ -1,7 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
 import styled from 'styled-components';
-import TodoModifyModal from './TodoModifyModal';
 
 const Todo = styled.div`
   font-size: 24px;
@@ -13,7 +11,6 @@ const Todo = styled.div`
 
 const TodoItem = React.memo(
   ({ data, setModifyModal }) => {
-    console.log('TodoItem');
     return (
       <>
         <Todo

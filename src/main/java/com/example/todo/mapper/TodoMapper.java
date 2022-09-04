@@ -11,6 +11,8 @@ import java.util.List;
 @Mapper
 public interface TodoMapper {
 
+    List<Todo> getTodos();
+
     List<Todo> getTodosWithDate(@Param("date") String date);
 
     void addTodo(Todo todo);

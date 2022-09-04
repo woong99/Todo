@@ -1,6 +1,12 @@
-import {combineReducers, createStore} from 'redux';
-import reducer from './modules/reducers';
+import reducer from './modules/today';
+import { configureStore } from '@reduxjs/toolkit';
+import todosReducer from './modules/todos';
 
-const store = createStore(reducer);
+const store = configureStore({
+  reducer: {
+    todos: todosReducer,
+    date: reducer,
+  },
+});
 
 export default store;

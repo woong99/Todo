@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TodoService {
 
+    public List<Todo> getTodos();
+
     public List<Todo> getTodosWithDate(String date);
 
     public void addTodo(Todo todo);

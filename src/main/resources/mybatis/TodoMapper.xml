@@ -2,15 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.todo.mapper.TodoMapper">
+    <select id="getTodos" resultType="Todo">
+        select *
+        from todo_table
+    </select>
+
     <select id="getTodosWithDate" resultType="Todo">
         SELECT *
         FROM todo_table
-        where todo_date = #{date};
+        where todo_date like concat('%', #{date}, '%');
     </select>
 
     <insert id="addTodo" parameterType="com.example.todo.dto.Todo">
-        insert into todo_table(todo_title, todo_content)
-            value (#{todoTitle}, #{todoContent})
+        insert into todo_table(todo_title, todo_content, todo_date)
+            value (#{todoTitle}, #{todoContent}, #{todoDate})
     </insert>
 
     <select id="getTodo" resultType="Todo">

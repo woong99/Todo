@@ -13,6 +13,10 @@ public class TodoServiceImpl implements TodoService {
 
     private final TodoMapper todoMapper;
 
+    @Override
+    public List<Todo> getTodos() {
+        return todoMapper.getTodos();
+    }
 
     @Override
     public List<Todo> getTodosWithDate(String date) {

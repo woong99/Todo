@@ -16,6 +16,12 @@ class TodoServiceTest {
     private TodoService todoService;
 
     @Test
+    public void getTodosWithMonthTest() {
+        List<Todo> todos = todoService.getTodos();
+        log.info(String.valueOf(todos));
+    }
+
+    @Test
     public void getTodosWithDateTest() {
         List<Todo> todos = todoService.getTodosWithDate("2022-08-13");
         log.info(String.valueOf(todos));

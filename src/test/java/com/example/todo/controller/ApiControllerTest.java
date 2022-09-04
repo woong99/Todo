@@ -30,6 +30,15 @@ class ApiControllerTest {
     @Mock
     private TodoService todoService;
 
+    @Test
+    public void getTodosWithMonthTest() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("http://localhost:8080/api/todos")
+        ).andExpect(
+                MockMvcResultMatchers.status().isOk()
+        ).andDo(MockMvcResultHandlers.print());
+    }
+
 
     @Test
     public void getTodosWithDateTest() throws Exception {
