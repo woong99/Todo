@@ -15,6 +15,9 @@ const StyledContainer = styled(Container)`
   max-height: 848px;
   background-color: white;
   position: relative;
+  @media screen and (min-width: 425px) {
+    border: 1px solid black;
+  }
 `;
 
 function App() {
